@@ -4,6 +4,8 @@ Ein einfaches, kindgerechtes Drag & Drop Spiel für 4-Jährige als Progressive W
 
 https://codeispoetry.github.io/pawpatroldragndrop
 
+![QR Code](qr.png)
+
 ## Spielprinzip
 
 - 5 verschiedenfarbige Hundefiguren müssen zu ihren passenden Nestern gezogen werden
