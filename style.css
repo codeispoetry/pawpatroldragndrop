@@ -227,9 +227,9 @@ body {
 }
 
 .nest {
-    width: 100px;
-    height: 100px;
-    margin: 8px;
+    width: 140px;
+    height: 140px;
+    margin: 4px;
     display: inline-block;
     position: relative;
     transition: all 0.3s ease;
@@ -241,8 +241,8 @@ body {
 }
 
 .nest-inner {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
     border-radius: 12px;
     border: 4px dashed #333;
     margin: 0 auto;
@@ -255,8 +255,8 @@ body {
 }
 
 .vehicle-svg {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     opacity: 0.8;
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
 }
@@ -422,9 +422,9 @@ body {
     }
     
     .nest {
-        width: calc(33.333% - 4px);
-        height: 100px;
-        margin: 2px;
+        width: calc(33.333% - 2px);
+        height: 130px;
+        margin: 1px;
         /* Größere Touch-Targets */
         min-height: 44px;
         min-width: 44px;
@@ -448,13 +448,13 @@ body {
     }
     
     .nest-inner {
-        width: 70px;
-        height: 70px;
+        width: 100px;
+        height: 100px;
     }
     
     .vehicle-svg {
-        width: 70px;
-        height: 70px;
+        width: 85px;
+        height: 85px;
     }
     
     /* Touch-Feedback verstärken auf mobil */
