@@ -558,7 +558,7 @@ function restartGame() {
     dogs.forEach(dog => {
         dog.draggable = true;
         dog.style.position = '';
-        dog.style.margin = '8px';
+        dog.style.margin = '';
         dog.style.transform = '';
         dogsArea.appendChild(dog);
     });
