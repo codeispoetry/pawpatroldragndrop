@@ -1,6 +1,6 @@
-# 🐕 Hunde Heimfinden - Drag & Drop Spiel
+# � PAW Patrol Einsatz! - Drag & Drop Spiel
 
-Ein einfaches, kindgerechtes Drag & Drop Spiel für 4-Jährige als Progressive Web App (PWA).
+Ein kindgerechtes PAW Patrol Drag & Drop Spiel für 4-Jährige als Progressive Web App (PWA).
 
 https://codeispoetry.github.io/pawpatroldragndrop
 
@@ -8,20 +8,38 @@ https://codeispoetry.github.io/pawpatroldragndrop
 
 ## Spielprinzip
 
-- 5 verschiedenfarbige Hundefiguren müssen zu ihren passenden Nestern gezogen werden
-- Einfache Drag & Drop Funktionalität (funktioniert auch auf Tablets/Handys)
-- Sofortiges positives Feedback mit Sounds und Animationen
-- Automatischer Neustart nach erfolgreichem Abschluss
+- 6 PAW Patrol Welpen (Marshall, Chase, Rocky, Rubble, Skye, Zuma) müssen zu ihren passenden Fahrzeugen gezogen werden
+- Intuitive Drag & Drop Funktionalität (optimiert für Touch-Geräte)
+- Sofortiges positives Feedback mit Animationen und visuellen Effekten
+- Timer-basierte Highscore-Liste mit localStorage-Speicherung
+- Zufällige Anordnung der Charaktere bei jedem Spiel
+- Automatische Namenseingabe für Highscores nach erfolgreichem Abschluss
 
 ## Features
 
-- 🎮 Sofort spielbereit - keine Menüs oder komplizierte Einstellungen
-- 📱 Progressive Web App - kann wie eine native App installiert werden
-- 🔊 Einfache, positive Sound-Effekte
-- 🎨 Kinderfreundliche, bunte Grafik
-- ✨ Belohnungsanimationen (Konfetti beim Gewinnen)
-- 📴 Funktioniert offline
-- 🔄 Einfacher Neustart-Button
+- 🎮 **Sofort spielbereit** - keine Menüs oder komplizierte Einstellungen
+- 🐕 **PAW Patrol Charaktere** - detaillierte SVG-Grafiken aller 6 Welpen
+- 🚗 **Fahrzeug-Matching** - Feuerwehr, Polizeiauto, Bagger, Helikopter und mehr
+- 📱 **Progressive Web App** - installierbar wie eine native App
+- ⏱️ **Highscore-System** - Zeit messen und beste Rekorde speichern
+- 🔀 **Zufällige Anordnung** - bei jedem Spielstart neue Positionen
+- 📱 **Touch-optimiert** - perfekt für Tablets und Smartphones
+- ✨ **Belohnungsanimationen** - Konfetti beim Gewinnen
+- 📴 **Offline-fähig** - funktioniert ohne Internetverbindung
+- 🏆 **Bestenliste** - Top 10 Zeiten mit Name und Zeit
+
+## PAW Patrol Charaktere
+
+Das Spiel enthält alle 6 Hauptcharaktere der PAW Patrol mit ihren charakteristischen Fahrzeugen:
+
+- 🔥 **Marshall** - Feuerwehrwelpe mit Feuerwehrauto
+- 🚔 **Chase** - Polizeiwelpe mit Polizeiauto  
+- ♻️ **Rocky** - Recycling-Welpe mit Müllwagen
+- 🚧 **Rubble** - Bau-Welpe mit Bagger
+- 🚁 **Skye** - Flug-Welpe mit Helikopter
+- 🌊 **Zuma** - Wasser-Welpe mit Hovercraft
+
+Jeder Charakter ist als detaillierte SVG-Grafik mit originaltreuen Farben und Ausrüstung gestaltet.
 
 ## Installation und Start
 
@@ -47,10 +65,12 @@ npx serve .
 
 ## Technische Details
 
-- **HTML5**: Semantische Struktur
-- **CSS3**: Responsive Design, Animationen
-- **JavaScript**: Drag & Drop API, Touch Events, Web Audio API
-- **PWA**: Service Worker, Manifest, Offline-Support
+- **HTML5**: Semantische Struktur mit PAW Patrol Charakteren
+- **CSS3**: Responsive Design, Touch-Optimierungen, Animationen
+- **JavaScript**: Drag & Drop API, Touch Events, Timer-System, Highscore-Verwaltung
+- **SVG-Grafiken**: Custom PAW Patrol Charaktere und Fahrzeuge
+- **PWA**: Service Worker, Manifest, Offline-Support, PNG-Icons
+- **localStorage**: Persistente Highscore-Speicherung
 - **Keine externen Abhängigkeiten**
 
 ## Browser-Kompatibilität
@@ -65,19 +85,27 @@ npx serve .
 
 ### Dateistruktur:
 ```
-├── index.html          # Haupt-HTML-Datei
-├── style.css           # Kindgerechtes CSS-Design
-├── script.js           # Spiellogik und PWA-Features
-├── manifest.json       # PWA-Manifest
+├── index.html          # Haupt-HTML mit PAW Patrol Charakteren
+├── style.css           # Responsive Design und Touch-Optimierung
+├── script.js           # Spiellogik, Timer und Highscore-System
+├── manifest.json       # PWA-Manifest mit korrekten Icons
 ├── sw.js              # Service Worker für Offline-Support
+├── icon-144.png       # PWA Icon (144x144)
+├── icon-192.png       # PWA Icon (192x192)
+├── icon-512.png       # PWA Icon (512x512)
 └── README.md          # Diese Datei
 ```
 
 ### Anpassungen:
-- Farben in `style.css` ändern
-- Anzahl der Hunde in `script.js` anpassen (Variable `totalDogs`)
-- Sounds in den Funktionen `playSuccessSound()` und `playWinSound()` modifizieren
+- PAW Patrol Farben und Charaktere in `style.css`
+- Anzahl der Welpen in `script.js` anpassen (Variable `totalDogs = 6`)
+- Highscore-Funktionen in `loadHighscores()` und `saveHighscore()` anpassen
+- Timer-Intervall in `updateTimer()` modifizieren
 
 ## Lizenz
 
-Dieses Projekt ist als Lernsoftware für Kinder entwickelt und frei verwendbar.
+Dieses PAW Patrol inspirierte Spiel ist als Lernsoftware für Kinder entwickelt und frei verwendbar.
+
+---
+
+**Hinweis**: Dies ist ein inoffizielles Fan-Projekt. PAW Patrol™ ist ein Markenzeichen von Spin Master Ltd.
