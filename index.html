@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAW Patrol Einsatz! 🚁</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4CAF50">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐕</text></svg>">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🚨 PAW PATROL 🚔</h1>
+            <p>Bringe jeden zu seinem Fahrzeug!</p>
+        </div>
+        
+        <div class="success-message" id="successMessage">
+            🎉 Einsatz erfolgreich! Paw Patrol ist bereit! 🎉
+            <div class="time-display" id="timeDisplay">Zeit: <span id="finalTime">0:00</span></div>
+            <p style="margin: 15px 0; font-size: 0.9em; opacity: 0.9;">Gleich kannst du deinen Namen eintragen...</p>
+            <button onclick="restartGame()" class="restart-btn secondary">Spiel beenden</button>
+        </div>
+        
+        <!-- Name Input Dialog -->
+        <div class="name-input-dialog" id="nameInputDialog">
+            <div class="dialog-content">
+                <h3>🏆 Neuer Rekord!</h3>
+                <p>Wie heißt du?</p>
+                <input type="text" id="playerName" placeholder="Dein Name" maxlength="15" autocapitalize="characters">
+                <div class="dialog-buttons">
+                    <button onclick="saveHighscore()" class="save-btn">Speichern</button>
+                    <button onclick="skipHighscore()" class="skip-btn">Überspringen</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Highscore Liste -->
+        <div class="highscore-panel" id="highscorePanel">
+            <div class="panel-header">
+                <h3>🏆 Bestzeiten</h3>
+                <button onclick="toggleHighscore()" class="close-btn">×</button>
+            </div>
+            <div class="highscore-list" id="highscoreList">
+                <!-- Wird dynamisch gefüllt -->
+            </div>
+            <button onclick="clearHighscores()" class="clear-btn">Liste löschen</button>
+        </div>
+        
+        <div class="game-area">
+            <!-- Paw Patrol Welpen -->
+            <div class="dogs-area">
+                <div class="dog" draggable="true" data-color="red" id="dog-red">
+                    <div class="paw-character marshall">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Marshall Körper -->
+                            <ellipse cx="50" cy="65" rx="20" ry="15" fill="#FF4444"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="18" fill="#FFFFFF"/>
+                            <!-- Flecken -->
+                            <ellipse cx="42" cy="28" rx="6" ry="4" fill="#FF4444"/>
+                            <ellipse cx="58" cy="32" rx="4" ry="3" fill="#FF4444"/>
+                            <!-- Augen -->
+                            <circle cx="45" cy="32" r="3" fill="#000"/>
+                            <circle cx="55" cy="32" r="3" fill="#000"/>
+                            <circle cx="46" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="56" cy="31" r="1" fill="#FFF"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="38" r="2" fill="#000"/>
+                            <!-- Helm -->
+                            <ellipse cx="50" cy="25" rx="15" ry="8" fill="#FF0000"/>
+                            <rect x="45" y="20" width="10" height="3" fill="#FFD700"/>
+                            <!-- Pfoten -->
+                            <circle cx="40" cy="75" r="4" fill="#FF4444"/>
+                            <circle cx="60" cy="75" r="4" fill="#FF4444"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Marshall</div>
+                </div>
+                
+                <div class="dog" draggable="true" data-color="blue" id="dog-blue">
+                    <div class="paw-character chase">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Chase Körper -->
+                            <ellipse cx="50" cy="65" rx="20" ry="15" fill="#4488FF"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="18" fill="#8B4513"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="50" cy="42" rx="8" ry="6" fill="#D2B48C"/>
+                            <!-- Augen -->
+                            <circle cx="45" cy="32" r="3" fill="#000"/>
+                            <circle cx="55" cy="32" r="3" fill="#000"/>
+                            <circle cx="46" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="56" cy="31" r="1" fill="#FFF"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="40" r="2" fill="#000"/>
+                            <!-- Polizei Cap -->
+                            <ellipse cx="50" cy="25" rx="16" ry="10" fill="#000080"/>
+                            <circle cx="50" cy="25" r="4" fill="#FFD700"/>
+                            <text x="50" y="27" text-anchor="middle" font-size="6" fill="#000">★</text>
+                            <!-- Ohren -->
+                            <ellipse cx="38" cy="30" rx="4" ry="8" fill="#8B4513"/>
+                            <ellipse cx="62" cy="30" rx="4" ry="8" fill="#8B4513"/>
+                            <!-- Pfoten -->
+                            <circle cx="40" cy="75" r="4" fill="#4488FF"/>
+                            <circle cx="60" cy="75" r="4" fill="#4488FF"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Chase</div>
+                </div>
+                
+                <div class="dog" draggable="true" data-color="green" id="dog-green">
+                    <div class="paw-character rocky">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Rocky Körper -->
+                            <ellipse cx="50" cy="65" rx="20" ry="15" fill="#44AA44"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="18" fill="#808080"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="50" cy="42" rx="8" ry="5" fill="#A9A9A9"/>
+                            <!-- Augen -->
+                            <circle cx="45" cy="32" r="3" fill="#000"/>
+                            <circle cx="55" cy="32" r="3" fill="#000"/>
+                            <circle cx="46" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="56" cy="31" r="1" fill="#FFF"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="39" r="2" fill="#000"/>
+                            <!-- Recycling Cap -->
+                            <ellipse cx="50" cy="25" rx="15" ry="9" fill="#228B22"/>
+                            <text x="50" y="27" text-anchor="middle" font-size="8" fill="#FFF">♻</text>
+                            <!-- Ohren (spitze) -->
+                            <polygon points="35,28 38,20 42,28" fill="#808080"/>
+                            <polygon points="58,28 62,20 65,28" fill="#808080"/>
+                            <!-- Flecken -->
+                            <circle cx="42" cy="30" r="2" fill="#696969"/>
+                            <circle cx="60" cy="35" r="1.5" fill="#696969"/>
+                            <!-- Pfoten -->
+                            <circle cx="40" cy="75" r="4" fill="#44AA44"/>
+                            <circle cx="60" cy="75" r="4" fill="#44AA44"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Rocky</div>
+                </div>
+                
+                <div class="dog" draggable="true" data-color="yellow" id="dog-yellow">
+                    <div class="paw-character rubble">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Rubble Körper -->
+                            <ellipse cx="50" cy="65" rx="22" ry="15" fill="#FFAA44"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="19" fill="#DEB887"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="50" cy="43" rx="9" ry="6" fill="#F5DEB3"/>
+                            <!-- Augen -->
+                            <circle cx="44" cy="32" r="3" fill="#000"/>
+                            <circle cx="56" cy="32" r="3" fill="#000"/>
+                            <circle cx="45" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="57" cy="31" r="1" fill="#FFF"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="41" r="2" fill="#000"/>
+                            <!-- Bauhelm -->
+                            <ellipse cx="50" cy="23" rx="17" ry="12" fill="#FFD700"/>
+                            <rect x="45" y="18" width="10" height="2" fill="#FFA500"/>
+                            <!-- Ohren (hängend) -->
+                            <ellipse cx="36" cy="35" rx="5" ry="10" fill="#DEB887"/>
+                            <ellipse cx="64" cy="35" rx="5" ry="10" fill="#DEB887"/>
+                            <!-- Flecken -->
+                            <circle cx="58" cy="39" r="2" fill="#D2691E"/>
+                            <!-- Pfoten -->
+                            <circle cx="38" cy="75" r="5" fill="#FFAA44"/>
+                            <circle cx="62" cy="75" r="5" fill="#FFAA44"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Rubble</div>
+                </div>
+                
+                <div class="dog" draggable="true" data-color="purple" id="dog-purple">
+                    <div class="paw-character skye">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Skye Körper -->
+                            <ellipse cx="50" cy="65" rx="18" ry="13" fill="#DD44DD"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="16" fill="#DDA0DD"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="50" cy="42" rx="7" ry="5" fill="#F0E68C"/>
+                            <!-- Augen -->
+                            <circle cx="45" cy="32" r="3" fill="#000"/>
+                            <circle cx="55" cy="32" r="3" fill="#000"/>
+                            <circle cx="46" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="56" cy="31" r="1" fill="#FFF"/>
+                            <!-- Wimpern -->
+                            <path d="M 42 29 L 40 27" stroke="#000" stroke-width="1"/>
+                            <path d="M 58 29 L 60 27" stroke="#000" stroke-width="1"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="40" r="1.5" fill="#000"/>
+                            <!-- Pilotenmütze -->
+                            <ellipse cx="50" cy="25" rx="14" ry="8" fill="#8B008B"/>
+                            <circle cx="50" cy="25" r="3" fill="#FFD700"/>
+                            <!-- Brille -->
+                            <circle cx="45" cy="32" r="5" fill="none" stroke="#FF1493" stroke-width="2"/>
+                            <circle cx="55" cy="32" r="5" fill="none" stroke="#FF1493" stroke-width="2"/>
+                            <path d="M 50 32 L 52 32" stroke="#FF1493" stroke-width="2"/>
+                            <!-- Ohren (spitz) -->
+                            <polygon points="35,25 40,15 45,25" fill="#DDA0DD"/>
+                            <polygon points="55,25 60,15 65,25" fill="#DDA0DD"/>
+                            <!-- Pfoten -->
+                            <circle cx="40" cy="74" r="4" fill="#DD44DD"/>
+                            <circle cx="60" cy="74" r="4" fill="#DD44DD"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Skye</div>
+                </div>
+                
+                <div class="dog" draggable="true" data-color="orange" id="dog-orange">
+                    <div class="paw-character zuma">
+                        <svg viewBox="0 0 100 100" class="character-svg">
+                            <!-- Zuma Körper -->
+                            <ellipse cx="50" cy="65" rx="20" ry="14" fill="#FF8C00"/>
+                            <!-- Kopf -->
+                            <circle cx="50" cy="35" r="18" fill="#D2691E"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="50" cy="43" rx="8" ry="6" fill="#F4A460"/>
+                            <!-- Augen -->
+                            <circle cx="45" cy="32" r="3" fill="#000"/>
+                            <circle cx="55" cy="32" r="3" fill="#000"/>
+                            <circle cx="46" cy="31" r="1" fill="#FFF"/>
+                            <circle cx="56" cy="31" r="1" fill="#FFF"/>
+                            <!-- Nase -->
+                            <circle cx="50" cy="41" r="2" fill="#000"/>
+                            <!-- Taucherhelm -->
+                            <ellipse cx="50" cy="25" rx="16" ry="10" fill="#FF4500"/>
+                            <circle cx="50" cy="25" r="4" fill="#00CED1"/>
+                            <!-- Taucherbrille -->
+                            <circle cx="45" cy="32" r="6" fill="none" stroke="#00BFFF" stroke-width="2"/>
+                            <circle cx="55" cy="32" r="6" fill="none" stroke="#00BFFF" stroke-width="2"/>
+                            <path d="M 51 32 L 49 32" stroke="#00BFFF" stroke-width="2"/>
+                            <!-- Ohren (hängend) -->
+                            <ellipse cx="36" cy="33" rx="4" ry="9" fill="#D2691E"/>
+                            <ellipse cx="64" cy="33" rx="4" ry="9" fill="#D2691E"/>
+                            <!-- Flecken -->
+                            <circle cx="58" cy="38" r="2" fill="#CD853F"/>
+                            <circle cx="42" cy="30" r="1.5" fill="#CD853F"/>
+                            <!-- Pfoten -->
+                            <circle cx="40" cy="75" r="4" fill="#FF8C00"/>
+                            <circle cx="60" cy="75" r="4" fill="#FF8C00"/>
+                        </svg>
+                    </div>
+                    <div class="dog-name">Zuma</div>
+                </div>
+            </div>
+            
+            <!-- Paw Patrol Fahrzeuge -->
+            <div class="nests-area">
+                <div class="nest" data-color="red" id="nest-red">
+                    <div class="nest-inner red">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Feuerwehrauto -->
+                            <rect x="15" y="40" width="70" height="25" fill="#FF0000" rx="5"/>
+                            <rect x="10" y="50" width="15" height="8" fill="#FF4444"/>
+                            <rect x="75" y="50" width="15" height="8" fill="#FF4444"/>
+                            <!-- Kabine -->
+                            <rect x="15" y="25" width="25" height="15" fill="#FF0000" rx="3"/>
+                            <!-- Fenster -->
+                            <rect x="18" y="28" width="19" height="9" fill="#87CEEB" rx="2"/>
+                            <!-- Räder -->
+                            <circle cx="25" cy="65" r="8" fill="#333"/>
+                            <circle cx="75" cy="65" r="8" fill="#333"/>
+                            <circle cx="25" cy="65" r="5" fill="#666"/>
+                            <circle cx="75" cy="65" r="5" fill="#666"/>
+                            <!-- Leiter -->
+                            <rect x="45" y="20" width="3" height="20" fill="#FFD700"/>
+                            <rect x="42" y="22" width="9" height="2" fill="#FFD700"/>
+                            <rect x="42" y="28" width="9" height="2" fill="#FFD700"/>
+                            <rect x="42" y="34" width="9" height="2" fill="#FFD700"/>
+                            <!-- Schlauch -->
+                            <circle cx="65" cy="52" r="4" fill="#000" stroke="#333" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="nest" data-color="blue" id="nest-blue">
+                    <div class="nest-inner blue">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Polizeiauto -->
+                            <rect x="15" y="45" width="70" height="20" fill="#000080" rx="3"/>
+                            <!-- Kabine -->
+                            <rect x="15" y="30" width="30" height="15" fill="#000080" rx="2"/>
+                            <!-- Fenster -->
+                            <rect x="18" y="33" width="24" height="9" fill="#87CEEB" rx="1"/>
+                            <!-- Polizei Streifen -->
+                            <rect x="15" y="52" width="70" height="3" fill="#FFFFFF"/>
+                            <rect x="15" y="58" width="70" height="3" fill="#FFFFFF"/>
+                            <!-- Räder -->
+                            <circle cx="30" cy="65" r="7" fill="#333"/>
+                            <circle cx="70" cy="65" r="7" fill="#333"/>
+                            <circle cx="30" cy="65" r="4" fill="#666"/>
+                            <circle cx="70" cy="65" r="4" fill="#666"/>
+                            <!-- Sirene/Licht -->
+                            <rect x="20" y="25" width="6" height="5" fill="#FF0000" rx="1"/>
+                            <rect x="28" y="25" width="6" height="5" fill="#0000FF" rx="1"/>
+                            <!-- Polizei Stern -->
+                            <polygon points="50,38 52,42 56,42 53,45 54,49 50,46 46,49 47,45 44,42 48,42" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="nest" data-color="green" id="nest-green">
+                    <div class="nest-inner green">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Recycling Truck -->
+                            <rect x="15" y="45" width="70" height="20" fill="#228B22" rx="3"/>
+                            <!-- Kabine -->
+                            <rect x="15" y="30" width="25" height="15" fill="#228B22" rx="2"/>
+                            <!-- Fenster -->
+                            <rect x="18" y="33" width="19" height="9" fill="#87CEEB" rx="1"/>
+                            <!-- Container -->
+                            <rect x="45" y="25" width="35" height="20" fill="#32CD32" rx="2"/>
+                            <!-- Container Deckel -->
+                            <rect x="47" y="23" width="31" height="4" fill="#228B22" rx="1"/>
+                            <!-- Räder -->
+                            <circle cx="25" cy="65" r="7" fill="#333"/>
+                            <circle cx="75" cy="65" r="7" fill="#333"/>
+                            <circle cx="25" cy="65" r="4" fill="#666"/>
+                            <circle cx="75" cy="65" r="4" fill="#666"/>
+                            <!-- Recycling Symbol -->
+                            <g transform="translate(62,35) scale(0.8)">
+                                <path d="M 0,8 L 4,0 L 8,8 L 6,8 L 5,6 L 3,6 L 2,8 Z" fill="#FFF"/>
+                                <path d="M 8,0 L 6,4 L 14,4 L 12,2 L 10,4 L 12,4 L 14,0 Z" fill="#FFF" transform="rotate(120 8 4)"/>
+                                <path d="M 8,0 L 6,4 L 14,4 L 12,2 L 10,4 L 12,4 L 14,0 Z" fill="#FFF" transform="rotate(240 8 4)"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="nest" data-color="yellow" id="nest-yellow">
+                    <div class="nest-inner yellow">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Bagger -->
+                            <!-- Raupenfahrwerk -->
+                            <rect x="20" y="60" width="50" height="8" fill="#333" rx="4"/>
+                            <circle cx="25" cy="64" r="3" fill="#666"/>
+                            <circle cx="35" cy="64" r="3" fill="#666"/>
+                            <circle cx="45" cy="64" r="3" fill="#666"/>
+                            <circle cx="55" cy="64" r="3" fill="#666"/>
+                            <circle cx="65" cy="64" r="3" fill="#666"/>
+                            <!-- Hauptkörper -->
+                            <rect x="35" y="45" width="30" height="15" fill="#FFD700" rx="2"/>
+                            <!-- Kabine -->
+                            <rect x="40" y="35" width="20" height="10" fill="#FFAA00" rx="2"/>
+                            <!-- Fenster -->
+                            <rect x="42" y="37" width="16" height="6" fill="#87CEEB" rx="1"/>
+                            <!-- Ausleger -->
+                            <rect x="5" y="48" width="35" height="4" fill="#FFD700"/>
+                            <!-- Schaufel -->
+                            <path d="M 5,48 L 5,58 L 15,55 L 15,48 Z" fill="#FFA500"/>
+                            <!-- Hydraulikzylinder -->
+                            <rect x="25" y="40" width="3" height="12" fill="#C0C0C0"/>
+                            <rect x="15" y="45" width="3" height="8" fill="#C0C0C0"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="nest" data-color="purple" id="nest-purple">
+                    <div class="nest-inner purple">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Helikopter -->
+                            <!-- Rumpf -->
+                            <ellipse cx="50" cy="50" rx="25" ry="8" fill="#8B008B"/>
+                            <!-- Cockpit -->
+                            <ellipse cx="35" cy="50" rx="12" ry="8" fill="#FF1493"/>
+                            <!-- Cockpit Fenster -->
+                            <ellipse cx="35" cy="48" rx="10" ry="5" fill="#87CEEB"/>
+                            <!-- Heckrotor -->
+                            <rect x="75" y="48" width="15" height="4" fill="#8B008B"/>
+                            <circle cx="85" cy="50" r="6" fill="none" stroke="#666" stroke-width="1"/>
+                            <path d="M 79,50 L 91,50 M 85,44 L 85,56" stroke="#999" stroke-width="1"/>
+                            <!-- Hauptrotor -->
+                            <circle cx="50" cy="35" r="2" fill="#333"/>
+                            <path d="M 20,35 L 80,35 M 50,5 L 50,65" stroke="#999" stroke-width="2" opacity="0.5"/>
+                            <!-- Kufen -->
+                            <rect x="35" y="58" width="30" height="3" fill="#333" rx="1"/>
+                            <rect x="30" y="58" width="5" height="6" fill="#333"/>
+                            <rect x="65" y="58" width="5" height="6" fill="#333"/>
+                            <!-- Details -->
+                            <rect x="45" y="46" width="10" height="3" fill="#FFFFFF"/>
+                            <circle cx="40" cy="52" r="2" fill="#FF69B4"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="nest" data-color="orange" id="nest-orange">
+                    <div class="nest-inner orange">
+                        <svg viewBox="0 0 100 100" class="vehicle-svg">
+                            <!-- Hovercraft -->
+                            <!-- Hauptkörper -->
+                            <ellipse cx="50" cy="45" rx="30" ry="12" fill="#FF8C00"/>
+                            <!-- Cockpit -->
+                            <ellipse cx="40" cy="40" rx="15" ry="8" fill="#FF4500"/>
+                            <!-- Fenster -->
+                            <ellipse cx="40" cy="38" rx="12" ry="5" fill="#87CEEB"/>
+                            <!-- Luftkissen -->
+                            <ellipse cx="50" cy="60" rx="32" ry="8" fill="#333" opacity="0.6"/>
+                            <ellipse cx="50" cy="58" rx="30" ry="6" fill="#666" opacity="0.3"/>
+                            <!-- Propeller hinten -->
+                            <circle cx="70" cy="35" r="8" fill="none" stroke="#999" stroke-width="1"/>
+                            <path d="M 62,35 L 78,35 M 70,27 L 70,43" stroke="#AAA" stroke-width="2" opacity="0.5"/>
+                            <!-- Steuerung -->
+                            <rect x="60" y="30" width="8" height="10" fill="#FF4500" rx="2"/>
+                            <!-- Details -->
+                            <rect x="25" y="42" width="8" height="3" fill="#FFFFFF"/>
+                            <circle cx="35" cy="50" r="2" fill="#00CED1"/>
+                            <!-- Rettungsringe -->
+                            <circle cx="15" cy="45" r="3" fill="none" stroke="#FF0000" stroke-width="2"/>
+                            <circle cx="85" cy="45" r="3" fill="none" stroke="#FF0000" stroke-width="2"/>
+                            <!-- Wasserwellen -->
+                            <path d="M 20,65 Q 25,70 30,65 T 40,65 T 50,65 T 60,65 T 70,65 T 80,65" stroke="#00BFFF" stroke-width="2" fill="none" opacity="0.7"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="progress">
+            <div class="progress-text">Welpen einsatzbereit: <span id="progress-count">0</span>/6</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="game-stats">
+                <span class="time-counter">⏱️ Zeit: <span id="gameTime">0:00</span></span>
+                <button onclick="toggleHighscore()" class="highscore-btn">🏆 Bestzeiten</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

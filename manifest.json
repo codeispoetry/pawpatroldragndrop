@@ -1,0 +1,29 @@
+{
+    "name": "PAW Patrol - Einsatzbereit!",
+    "short_name": "PAW Patrol",
+    "description": "Hilf den 6 PAW Patrol Welpen dabei, ihre Fahrzeuge für den nächsten Einsatz zu finden! Für Kinder ab 4 Jahren.",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#87CEEB",
+    "theme_color": "#4CAF50",
+    "orientation": "any",
+    "categories": ["games", "kids", "education"],
+    "lang": "de",
+    "icons": [
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192' style='background:%234CAF50'><circle cx='96' cy='96' r='88' fill='%23fff'/><text x='96' y='140' font-size='80' text-anchor='middle'>🐕</text></svg>",
+            "sizes": "192x192",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='background:%234CAF50'><circle cx='256' cy='256' r='240' fill='%23fff'/><text x='256' y='350' font-size='200' text-anchor='middle'>🐕</text></svg>",
+            "sizes": "512x512",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 144 144' style='background:%234CAF50'><circle cx='72' cy='72' r='64' fill='%23fff'/><text x='72' y='100' font-size='60' text-anchor='middle'>🐕</text></svg>",
+            "sizes": "144x144",
+            "type": "image/svg+xml"
+        }
+    ]
+}
