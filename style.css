@@ -221,17 +221,9 @@ body {
 }
 
 .character-svg {
-    width: 70px;
-    height: 70px;
+    width: 95px;
+    height: 95px;
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
-}
-
-.dog-name {
-    font-size: 0.85em;
-    font-weight: bold;
-    color: #2E7D32;
-    margin-top: 6px;
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
 }
 
 .nest {
@@ -263,8 +255,8 @@ body {
 }
 
 .vehicle-svg {
-    width: 55px;
-    height: 55px;
+    width: 80px;
+    height: 80px;
     opacity: 0.8;
     filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
 }
@@ -451,8 +443,8 @@ body {
     }
     
     .character-svg {
-        width: 60px;
-        height: 60px;
+        width: 75px;
+        height: 75px;
     }
     
     .nest-inner {
@@ -461,12 +453,8 @@ body {
     }
     
     .vehicle-svg {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .dog-name {
-        font-size: 0.75em;
+        width: 70px;
+        height: 70px;
     }
     
     /* Touch-Feedback verstärken auf mobil */
