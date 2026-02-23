@@ -1,9 +1,9 @@
 {
-    "name": "PAW Patrol - Einsatzbereit!",
-    "short_name": "PAW Patrol",
-    "description": "Hilf den 6 PAW Patrol Welpen dabei, ihre Fahrzeuge für den nächsten Einsatz zu finden! Für Kinder ab 4 Jahren.",
+    "name": "LAURIN Patrol - Einsatzbereit!",
+    "short_name": "LAURIN Patrol",
+    "description": "Hilf den 6 LAURIN Patrol Welpen dabei, ihre Fahrzeuge für den nächsten Einsatz zu finden! Für Kinder ab 4 Jahren.",
     "start_url": "./",
-    "id": "pawpatrol-dragndrop",
+    "id": "laurinpatrol-dragndrop",
     "display": "standalone",
     "background_color": "#87CEEB",
     "theme_color": "#4CAF50",
